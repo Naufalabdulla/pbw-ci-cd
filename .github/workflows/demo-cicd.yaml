@@ -1,0 +1,28 @@
+name: Demo CI/CD
+   # Sebagai kondisi, WorkFlow akan dijalankan ketika apa?
+   # Pada kasus disini, setiap kita melakukan push
+   # ke branch main. Maka WorkFlow akan dijalankan
+on:
+  push:
+    branches: ["main"]
+# Untuk mengelompokan tugas-tugasnya ngapain aja
+jobs:
+  # Nama Jobs nya
+  demo-deploy:
+    # Kita kasih self-hosted karena run dilokal
+    runs-on: self-hosted
+    # Langkah-langkah Jobs nya mau ngapain aja
+    steps:
+      - name: 1. Ambil perubahan kode
+        uses: actions/checkout@v3
+
+      - name: 2. Simulasi Install Dependency
+        run: echo "Sedang menginstall library yang dibutuhkan..."
+
+      - name: 3. Membuat surat
+        run: |
+          echo "Halo! Aku Liz dari Lumiere." > surat_dari_liz.txt
+          echo "Dibuat pada $(date)" >> surat_dari_liz.txt
+
+      - name: 4. Selesai
+        run: echo "Deployment Berhasil!"
